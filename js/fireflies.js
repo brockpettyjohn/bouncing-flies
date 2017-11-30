@@ -4,11 +4,13 @@ const GameState = {
     preload: function () {
         game.load.image('background', 'assets/blue-background.jpg')
         game.load.image('firefly', 'assets/firefly.png')
-        game.load.image('rhino', 'assets/rhino.png')
+        game.load.image('banana', 'assets/banana.jpg')
+        game.load.image('apple', 'assets/apple.jpg')
+        game.load.image('grape', 'assets/grape.jpg')
+        game.load.image('orange', 'assets/orange.jpg')
+        game.load.image('strawberry', 'assets/strawberry.jpg')
     },
     create: function () {
-       
-
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
         this.scale.pageAlignHorizontally = true
         this.scale.pageAlignVertically = true
@@ -27,9 +29,15 @@ const GameState = {
         bounceHouse(this.firefly3)
         bounceHouse(this.firefly4)
         bounceHouse(this.firefly5)
+
+        this.firefly.addChild(makeChild(0, 0, 'banana', 1.25))
+        this.firefly2.addChild(makeChild(0, 0, 'apple', 1.25))
+        this.firefly3.addChild(makeChild(0, 0, 'orange', 1.25))
+        this.firefly4.addChild(makeChild(0, 0, 'grape', 1.25))
+        this.firefly5.addChild(makeChild(0, 0, 'strawberry', 1.25))
     },
     update: function () {
-       
+
         this.game.physics.arcade.collide(this.firefly, this.firefly2);
         this.game.physics.arcade.collide(this.firefly, this.firefly3);
         this.game.physics.arcade.collide(this.firefly, this.firefly4);
@@ -49,6 +57,15 @@ function placeSprite(x, y, name, scale = 1, anchor = .5) {
     sprite.anchor.setTo(anchor)
     return sprite
 }
+
+function makeChild(x, y, name, scale = 1) {
+    var childSprite = game.make.sprite(x, y, name)
+    childSprite.scale.setTo(scale)
+    childSprite.anchor.setTo(.5, 0)
+    return childSprite
+}
+
+
 
 function bounceHouse(name) {
     name.body.velocity.setTo(50, 50);
